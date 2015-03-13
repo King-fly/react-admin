@@ -2,14 +2,16 @@ import React from 'react';
 
 import DatagridActions from '../../Actions/DatagridActions';
 import DatagridStore from '../../Store/DatagridStore';
-import Header from '../../Component/Datagrid/ColumnHeader';
+import Header from './ColumnHeader';
+import Pagination from './Pagination';
 
 import { BooleanField, DateField, NumberField, ReferenceField, TemplateField } from './Field';
 
 class Datagrid extends React.Component {
     constructor() {
         this.state = {
-            entries: []
+            entries: [],
+            totalItems: 0
         };
     }
 
@@ -30,11 +32,17 @@ class Datagrid extends React.Component {
     }
 
     onChange() {
-        this.setState({ entries: DatagridStore.getState().entries });
+        this.setState({
+            entries: DatagridStore.getState().entries,
+            totalItems: DatagridStore.getState().totalItems
+        });
     }
 
     refreshData(view) {
-        DatagridActions.loadData(view);
+        DatagridActions.loadData({
+            view: view,
+            page: this.props.page
+        });
     }
 
     buildHeaders() {
@@ -59,7 +67,9 @@ class Datagrid extends React.Component {
 
     buildRecords() {
         return this.state.entries.map(r => (
-            <tr>{this.buildCells(r)}</tr>
+            <tr>
+                {this.buildCells(r)}
+            </tr>
         ));
     }
 
@@ -111,17 +121,20 @@ class Datagrid extends React.Component {
 
     render() {
         return (
-            <table className="datagrid">
-                <thead>
-                    <tr>
+            <div>
+                <table className="datagrid">
+                    <thead>
+                        <tr>
                         {this.buildHeaders()}
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {this.buildRecords()}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+                <Pagination perPage={this.props.perPage} totalItems={this.state.totalItems} page={this.props.page} />
+            </div>
         );
     }
 }

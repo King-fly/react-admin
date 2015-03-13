@@ -3,7 +3,9 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 body {
+    @extend .container-fluid;
     background: #f8f8f8;
+    padding-right: 0;
 }
 
 a {
@@ -46,7 +48,7 @@ a {
 
 .view-wrapper {
     margin-left: 250px;
-    padding-left: 30px;
+    padding: 0 30px;
     border-left: 1px solid #e7e7e7;
     min-height: 568px;
     background: #fff;
@@ -94,5 +96,21 @@ a {
     .boolean-false {
         @extend .glyphicon;
         @extend .glyphicon-remove;
+    }
+}
+
+.pagination {
+    @extend .pull-right;
+    text-align: right;
+    margin: 20px 0;
+
+    .total {
+        display: inline-block;
+        margin: 28px 15px 0 0;
+    }
+
+    ul {
+        @extend .pull-right;
+        @extend .pagination;
     }
 }
