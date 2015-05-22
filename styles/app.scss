@@ -21,6 +21,10 @@ a {
     h1 {
         margin: 0;
         @extend .navbar-brand;
+
+        a {
+            color: #777;
+        }
     }
 }
 
@@ -53,6 +57,11 @@ a {
     border-left: 1px solid #e7e7e7;
     min-height: 568px;
     background: #fff;
+
+    h1 {
+        margin: 0;
+        padding: 20px 0 0 0;
+    }
 
     .page-header {
         padding-top: 20px;
