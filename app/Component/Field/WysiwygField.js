@@ -28,4 +28,6 @@ WysiwygField.propTypes = {
     updateField: React.PropTypes.func
 };
 
+require('../../autoloader')('WysiwygField', WysiwygField);
+
 export default WysiwygField;
